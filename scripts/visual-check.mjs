@@ -1,0 +1,11 @@
+﻿import {chromium} from 'playwright';import fs from 'node:fs/promises';
+const b=await chromium.launch({channel:'chrome',headless:true});const p=await b.newPage({viewport:{width:1440,height:1000}});
+await p.goto('http://127.0.0.1:5173/template-kit/pricing/',{waitUntil:'networkidle'});
+await p.evaluate(async()=>{document.documentElement.style.scrollBehavior='auto';await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));for(let y=0;y<document.body.scrollHeight;y+=800){scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,100));}});
+await p.locator('.terra-testimonials').scrollIntoViewIfNeeded();await p.screenshot({path:'reference/local/testimonials-detail.png'});
+console.log('CAROUSEL',await p.locator('.terra-testimonials').evaluate(e=>({height:e.offsetHeight,swiper:e.querySelector('.swiper').offsetHeight,slide:e.querySelector('.swiper-slide').offsetHeight,bio:e.querySelector('.elementskit-commentor-bio').getBoundingClientRect().toJSON(),wrap:e.querySelector('.swiper').getBoundingClientRect().toJSON()})));
+await p.locator('[role=progressbar]').first().scrollIntoViewIfNeeded();await p.waitForTimeout(3700);await p.screenshot({path:'reference/local/progress-detail.png'});
+console.log('BARS',await p.locator('[role=progressbar]').evaluateAll(es=>es.map(e=>({height:e.offsetHeight,width:e.offsetWidth,fill:e.firstChild.offsetWidth,background:getComputedStyle(e.firstChild).backgroundColor}))));
+await p.goto('http://127.0.0.1:5173/2022/12/12/make-learning-fun-for-your-kids/',{waitUntil:'networkidle'});await p.screenshot({path:'reference/local/article-fixed.png',fullPage:true});
+await p.setViewportSize({width:390,height:844});await p.goto('http://127.0.0.1:5173/',{waitUntil:'networkidle'});await p.screenshot({path:'reference/local/mobile-hero-fixed.png'});await p.getByRole('button',{name:'Open menu',exact:true}).click();await p.getByRole('link',{name:'Page',exact:true}).click();await p.screenshot({path:'reference/local/mobile-menu-fixed.png'});
+await b.close();

@@ -1,0 +1,137 @@
+﻿/* Compatibility for the template's original section-based layout. */
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+html, body, #root { min-width: 320px; }
+#root { overflow: clip; }
+#main-content { outline: none; }
+.elementor-shape { overflow: hidden; position: absolute; left: 0; width: 100%; line-height: 0; direction: ltr; pointer-events: none; }
+.elementor-shape-top { top: -1px; }
+.elementor-shape-bottom { bottom: -1px; }
+.elementor-shape svg { display: block; width: calc(100% + 1.3px); position: relative; left: 50%; transform: translateX(-50%); }
+.elementor-shape .elementor-shape-fill { fill: #fff; transform-origin: center; }
+.elementor-shape[data-negative="false"].elementor-shape-bottom { transform: rotate(180deg); }
+.elementor-shape[data-negative="true"].elementor-shape-top { transform: rotate(180deg); }
+.elementor-animation-grow { transition: transform .3s ease, background-color .3s ease; }
+.elementor-animation-grow:hover, .elementor-animation-grow:focus-visible { transform: scale(1.1); }
+.terra-logo-link { display: inline; }
+.elementor-icon-list-text[href] { color: inherit; }
+.elementor-icon-list-text[href]:hover { color: #ffb74b; }
+a, button { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid #ffb74b; outline-offset: 4px; }
+.terra-skip-link { position: fixed; top: -80px; left: 20px; padding: 12px 20px; background: #1f3473; color: #fff !important; z-index: 99999; border-radius: 8px; }
+.terra-skip-link:focus { top: 15px; }
+
+/* Navigation: original menu artwork, with React-owned open and focus states. */
+.elementskit-navbar-nav > li { position: relative; }
+.elementskit-navbar-nav .terra-submenu-open > .elementskit-dropdown,
+.elementskit-navbar-nav .menu-item-has-children:focus-within > .elementskit-dropdown { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
+.elementskit-dropdown > li > a { white-space: nowrap; }
+.elementskit-menu-hamburger-icon { display: block; }
+@media(min-width:1025px) {
+ .elementskit-navbar-nav .menu-item-has-children:hover > .elementskit-dropdown { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
+}
+@media(max-width:1024px) {
+ .elementskit-menu-container.terra-menu-open { left: 0 !important; transform: translateX(0) !important; visibility: visible !important; }
+ .elementskit-menu-container .elementskit-dropdown { display: none !important; }
+ .elementskit-menu-container .terra-submenu-open > .elementskit-dropdown { display: block !important; }
+ .elementskit-menu-overlay.active { opacity: 1 !important; visibility: visible !important; left: 0 !important; }
+ .elementskit-menu-container { overflow-y: auto; }
+ .elementskit-nav-identity-panel .terra-logo-link { pointer-events: none; }
+}
+
+/* Galleries preserve the source grid; the dialog supports touch and keyboard. */
+.elementor-image-gallery a { display: block; overflow: hidden; }
+.elementor-image-gallery img { transition: filter .25s ease; }
+.elementor-image-gallery a:hover img { filter: brightness(.92); }
+.terra-modal-backdrop { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: 30px; background: rgba(0,0,0,.87); animation: terra-fade .2s ease; }
+.terra-modal { position: relative; width: min(800px,95vw); max-height: 92dvh; overflow: auto; background: #fffaf2; border-radius: 14px; box-shadow: 0 20px 80px #0006; }
+.terra-modal-toolbar { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 8px 12px; color: #fff; }
+.terra-modal-actions { display: flex; gap: 6px; margin-left: auto; }
+.elementor-kit-4 .terra-modal-actions button,
+.elementor-kit-4 .terra-lightbox-stage button { display: grid; place-items: center; padding: 10px; width: 42px; height: 42px; border: none; border-radius: 4px; background: transparent; color: #fff; }
+.elementor-kit-4 .terra-modal-actions button:hover,
+.elementor-kit-4 .terra-lightbox-stage button:hover { background: #ffffff22; }
+.terra-modal-gallery { background: transparent; box-shadow: none; width: 100%; height: 100%; overflow: hidden; border-radius: 0; }
+.terra-modal-gallery:fullscreen { background: #101010; }
+.terra-lightbox-stage { position: relative; height: calc(100% - 95px); display: flex; justify-content: center; align-items: center; overflow: auto; }
+.terra-lightbox-stage > img { width: auto; height: auto; max-width: calc(100% - 110px); max-height: 100%; object-fit: contain; cursor: zoom-in; }
+.terra-lightbox-stage.is-zoomed > img { max-width: none; max-height: none; width: 140%; cursor: zoom-out; }
+.terra-lightbox-stage button { position: fixed; top: 50%; z-index: 2; }
+.terra-lightbox-prev { left: 35px; }
+.terra-lightbox-next { right: 35px; }
+.terra-lightbox-caption { color: #fff; text-align: center; margin-top: 15px; }
+.terra-share-notice { position: absolute; left: 50%; bottom: 35px; transform: translateX(-50%); background: #fff; border-radius: 6px; padding: 10px 20px; }
+.terra-modal-video { width: min(1100px,95vw); background: #111; }
+.terra-modal-video iframe { display: block; width: 100%; aspect-ratio: 16/9; border: 0; }
+.terra-modal-content { padding: 0 36px 36px; }
+.terra-modal-class .terra-modal-toolbar button, .terra-modal-privacy .terra-modal-toolbar button { color: #383838; }
+.terra-modal-class { max-width: 650px; }
+.terra-class-photo { width: 100%; max-height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 22px; }
+.terra-class-time { color: #c09d77; }
+@keyframes terra-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* FAQs and progress retain the template's shapes and colors. */
+.terra-accordion-panel { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows .3s ease, visibility .3s; }
+.terra-accordion-panel.is-open { grid-template-rows: 1fr; visibility: visible; }
+.terra-accordion-panel > div { min-height: 0; overflow: hidden; }
+.terra-accordion-panel .elementskit-card-body { display: block; }
+.elementskit-card:not(.active) .ekit_accordion_active_icon { display: none; }
+.elementskit-card.active .ekit_accordion_normal_icon { display: none; }
+.elementskit-card.active .ekit_accordion_active_icon { display: block; }
+.terra-testimonials { outline-offset: 10px; touch-action: pan-y; }
+.terra-testimonials .swiper { overflow: hidden; }
+.terra-testimonials .swiper-wrapper { align-items: stretch; }
+.terra-testimonials .swiper-slide { min-width: 0; }
+.terra-testimonials .elementskit-stars svg { width: 1em; height: 1em; fill: currentColor; }
+.skill-track { min-height: 100%; }
+
+/* Forms submit to the local endpoint and report the actual outcome. */
+.terra-form-fields { border: 0; padding: 0; margin: 0; min-width: 0; }
+.terra-form-fields:disabled { opacity: .65; }
+.terra-form .mf-main-response-wrap { display: none; }
+.terra-form-status { padding: 12px 16px; margin-top: 16px; border-radius: 8px; background: #f2f4ff; color: #1f3473; font-size: 14px; }
+.terra-form-status.error { background: #fff0ed; color: #a83325; }
+.terra-form textarea { resize: vertical; }
+.terra-form input, .terra-form textarea { max-width: 100%; }
+.terra-not-found { padding: 180px 24px 120px; text-align: center; background: #a1dbe6; }
+.comments-area { margin: 30px auto 80px; }
+.comment-form p { margin-bottom: 20px; }
+
+@media(max-width:767px) {
+ .terra-modal-backdrop { padding: 10px; }
+ .terra-lightbox-stage > img { max-width: 100%; }
+ .terra-lightbox-prev { left: 8px; }
+ .terra-lightbox-next { right: 8px; }
+ .terra-modal-content { padding: 0 22px 25px; }
+ .terra-modal-content h2 { font-size: 28px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ html { scroll-behavior: auto; }
+ *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+/* Keep the expanded mobile list in normal flow so every item stays clickable. */
+@media(max-width:1024px) {
+ .elementskit-menu-container .terra-submenu-open > .elementskit-dropdown { position: static !important; height: auto !important; max-height: none !important; width: 100% !important; transform: none !important; margin: 0 !important; box-shadow: none !important; overflow: visible !important; }
+ .elementskit-menu-container .elementskit-dropdown > li { display: block; position: relative; }
+ .elementskit-menu-container .elementskit-dropdown > li > a { padding-left: 30px !important; }
+}
+/* The demo's empty article pages still need a readable title and comment form. */
+.single-post header { background: #a1dbe6; }
+.single-post .elementor-359 .elementor-element.elementor-element-5858f3d { margin-bottom: 0; }
+.single-post #main-content { padding: 64px 24px 0; }
+.single-post h1.entry-title { display: block; margin-bottom: 40px; }
+.single-post .comment-notes > span + span { margin-left: .3em; }
+.single-post .comment-form-cookies-consent input { margin-right: .4em; }
+.single-post .comment-form input[type=submit] { border: 0; }
+@media(max-width:767px) { .single-post #main-content { padding: 32px 20px 0; } }
+
+/* Isolate the page so the video pulse cannot paint over the mobile drawer. */
+#root > div > header { position: relative; z-index: 50; }
+#main-content { position: relative; z-index: 0; }
+.terra-testimonials .swiper { padding-bottom: 20px; }
+
+/* Supplied brand artwork keeps its original proportions and transparency. */
+.elementor img.terra-brand-logo { width: 100%; height: auto; max-width: 210px; object-fit: contain; }
+.elementskit-nav-identity-panel img.terra-brand-logo { width: 150px; max-height: none; }
+footer .elementor-widget-image { text-align: left; }
